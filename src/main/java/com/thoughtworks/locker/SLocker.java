@@ -8,6 +8,11 @@ public class SLocker extends AbstractLocker {
         super(capacity, SizeEnum.S);
     }
 
+    @Override
+    protected String getCalledClassName() {
+        return null;
+    }
+
     public Ticket store(Bag bag) {
         return this.commonStore(bag);
     }

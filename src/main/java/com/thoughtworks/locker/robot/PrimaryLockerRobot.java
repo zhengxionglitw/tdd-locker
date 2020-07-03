@@ -1,7 +1,9 @@
 package com.thoughtworks.locker.robot;
 
 import com.thoughtworks.locker.AbstractLocker;
+import com.thoughtworks.locker.Bag;
 import com.thoughtworks.locker.SizeEnum;
+import com.thoughtworks.locker.Ticket;
 import com.thoughtworks.locker.exception.ConfigErrorException;
 import com.thoughtworks.locker.utils.CollectionUtil;
 
@@ -22,5 +24,9 @@ public class PrimaryLockerRobot {
                 throw new ConfigErrorException();
             }
         }
+    }
+
+    public Ticket store(Bag bag) {
+        return lockerList.get(0).store(bag);
     }
 }

@@ -1,6 +1,7 @@
 package com.thoughtworks.locker;
 
 import com.thoughtworks.locker.exception.FullException;
+import com.thoughtworks.locker.exception.InvalidTicketException;
 import com.thoughtworks.locker.exception.UnknownOptionException;
 
 import java.util.HashMap;
@@ -18,16 +19,24 @@ public abstract class AbstractLocker {
         this.size = size;
     }
 
+    protected abstract String getCalledClassName();
+
     public Ticket store(Bag bag) {
-        throw new UnknownOptionException();
+        checkPermission(getCalledClassName());
+        return this.commonStore(bag);
     }
 
     public Bag retrieval(Ticket ticket) {
-        throw new UnknownOptionException();
+        checkPermission(getCalledClassName());
+        return this.retrieval(ticket);
     }
 
     public SizeEnum getSize() {
         return size;
+    }
+
+    public boolean exists(Ticket ticket) {
+        return storeBags.get(ticket) != null;
     }
 
     protected Ticket commonStore(Bag bag) {
@@ -42,9 +51,23 @@ public abstract class AbstractLocker {
 
     protected Bag commonRetrieval(Ticket ticket) {
         Bag bag = storeBags.get(ticket);
-        if (bag != null) {
-            this.availableCapacity++;
+        if (bag == null) {
+            throw new InvalidTicketException();
         }
+        this.availableCapacity++;
         return bag;
+    }
+
+    private void checkPermission(String calledClassName) {
+        if (calledClassName == null) {
+            return;
+        }
+        StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+        for (int i = 0; i < stackTraceElements.length; i++) {
+            if (stackTraceElements[i].getClassName().equalsIgnoreCase(calledClassName)) {
+                return;
+            }
+        }
+        throw new UnknownOptionException();
     }
 }
