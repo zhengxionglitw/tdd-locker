@@ -24,4 +24,8 @@ public class Locker {
         this.availableCapacity--;
         return ticket;
     }
+
+    public Bag retrieval(Ticket ticket) {
+        return storeBags.get(ticket);
+    }
 }

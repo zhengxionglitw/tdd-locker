@@ -37,4 +37,16 @@ public class LockerTest {
 
         locker.store(new Bag());
     }
+
+    @Test
+    public void should_retrieval_successful_when_retrieval_bag_given_a_valid_ticket() {
+        Locker locker = new Locker(2);
+        Bag bag = new Bag();
+        Ticket ticket = locker.store(bag);
+
+        Bag retrievalBag = locker.retrieval(ticket);
+
+        Assert.assertNotNull(retrievalBag);
+        Assert.assertEquals(bag, retrievalBag);
+    }
 }
