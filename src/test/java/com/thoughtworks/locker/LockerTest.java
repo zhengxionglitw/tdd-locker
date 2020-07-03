@@ -1,6 +1,7 @@
 package com.thoughtworks.locker;
 
 import com.thoughtworks.locker.exception.FullException;
+import com.thoughtworks.locker.exception.InvalidTicketException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -48,5 +49,12 @@ public class LockerTest {
 
         Assert.assertNotNull(retrievalBag);
         Assert.assertEquals(bag, retrievalBag);
+    }
+
+    @Test(expected = InvalidTicketException.class)
+    public void should_retrieval_fail_when_retrieval_bag_given_a_invalid_ticket() {
+        Locker locker = new Locker(1);
+
+        locker.retrieval(new Ticket());
     }
 }
