@@ -65,4 +65,11 @@ public class SLockerTest {
 
         mLocker.store(new Bag());
     }
+
+    @Test(expected = UnknownOptionException.class)
+    public void should_retrieval_fail_when_Mlocker_retrieval_bag_given_MLokcer() {
+        MLocker mLocker = new MLocker(1);
+
+        mLocker.retrieval(new Ticket());
+    }
 }
