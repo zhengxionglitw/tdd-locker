@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'checkstyle'
+}
+
+group 'org.thoughtworks'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'checkstyle'
+
+checkstyle {
+    configProperties.projectDir = projectDir
+    checkstyleMain.configFile = file("${rootProject.projectDir}/config/checkstyle/checkstyle-main.xml")
+    configProperties.checkstyleSuppressionsPath = file("${rootProject.projectDir}/config/checkstyle/supperssions.xml")
+    sourceSets = [sourceSets.main]
+    toolVersion = 6.7
+}
+
+task installGitHooks(type: Copy) {
+    from new File(rootProject.rootDir, 'pre-commit')
+    into {
+        new File(rootProject.rootDir, '.git/hooks')
+    }
+
+    fileMode 0755
+}
+
+build.dependsOn installGitHooks
+
+defaultTasks 'build'
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
