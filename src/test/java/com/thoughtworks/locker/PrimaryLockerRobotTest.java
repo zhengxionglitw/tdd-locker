@@ -30,4 +30,16 @@ public class PrimaryLockerRobotTest {
         Assert.assertNotNull(ticket);
         Assert.assertTrue(locker.exists(ticket));
     }
+
+    @Test
+    public void should_store_success_when_primary_robot_store_given_2_lockers_and_locker1_is_full() {
+        MLocker locker = new MLocker(1);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(new MLocker(1), locker));
+        primaryLockerRobot.store(new Bag());
+
+        Ticket ticket = primaryLockerRobot.store(new Bag());
+
+        Assert.assertNotNull(ticket);
+        Assert.assertTrue(locker.exists(ticket));
+    }
 }

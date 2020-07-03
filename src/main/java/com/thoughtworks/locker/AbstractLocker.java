@@ -7,7 +7,7 @@ import com.thoughtworks.locker.exception.UnknownOptionException;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AbstractLocker {
+public abstract class AbstractLocker implements ILocker {
     private final Map<Ticket, Bag> storeBags;
     private final SizeEnum size;
     private int availableCapacity;
@@ -21,11 +21,13 @@ public abstract class AbstractLocker {
 
     protected abstract String getCalledClassName();
 
+    @Override
     public Ticket store(Bag bag) {
         checkPermission(getCalledClassName());
         return this.commonStore(bag);
     }
 
+    @Override
     public Bag retrieval(Ticket ticket) {
         checkPermission(getCalledClassName());
         return this.retrieval(ticket);
@@ -37,6 +39,10 @@ public abstract class AbstractLocker {
 
     public boolean exists(Ticket ticket) {
         return storeBags.get(ticket) != null;
+    }
+
+    public boolean isFull() {
+        return this.availableCapacity == 0;
     }
 
     protected Ticket commonStore(Bag bag) {
