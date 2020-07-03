@@ -1,5 +1,6 @@
 package com.thoughtworks.locker;
 
+import com.thoughtworks.locker.exception.FullException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -27,5 +28,13 @@ public class LockerTest {
         Ticket ticket = locker.store(new Bag());
 
         Assert.assertNotNull(ticket);
+    }
+
+    @Test(expected = FullException.class)
+    public void should_store_failed_when_store_bag_given_locker_has_no_available_capacity() {
+        Locker locker = new Locker(1);
+        locker.store(new Bag());
+
+        locker.store(new Bag());
     }
 }
