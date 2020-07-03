@@ -26,6 +26,10 @@ public abstract class AbstractLocker {
         throw new UnknownOptionException();
     }
 
+    public SizeEnum getSize() {
+        return size;
+    }
+
     protected Ticket commonStore(Bag bag) {
         if (availableCapacity == 0) {
             throw new FullException();
