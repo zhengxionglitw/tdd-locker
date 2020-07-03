@@ -1,6 +1,7 @@
 package com.thoughtworks.locker;
 
 import com.thoughtworks.locker.exception.ConfigErrorException;
+import com.thoughtworks.locker.exception.FullException;
 import com.thoughtworks.locker.robot.PrimaryLockerRobot;
 import org.junit.Assert;
 import org.junit.Test;
@@ -41,5 +42,14 @@ public class PrimaryLockerRobotTest {
 
         Assert.assertNotNull(ticket);
         Assert.assertTrue(locker.exists(ticket));
+    }
+
+    @Test(expected = FullException.class)
+    public void should_store_fail_when_primary_robot_store_given_2_lockers_and_all_is_full() {
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(new MLocker(1), new MLocker(1)));
+        primaryLockerRobot.store(new Bag());
+        primaryLockerRobot.store(new Bag());
+
+        primaryLockerRobot.store(new Bag());
     }
 }
