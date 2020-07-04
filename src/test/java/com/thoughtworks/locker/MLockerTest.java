@@ -15,6 +15,6 @@ public class MLockerTest {
     public void should_retrieval_fail_when_Mlocker_retrieval_bag_given_MLokcer() {
         MLocker mLocker = new MLocker(1);
 
-        mLocker.retrieval(new Ticket());
+        mLocker.retrieval(new Ticket(SizeEnum.M));
     }
 }

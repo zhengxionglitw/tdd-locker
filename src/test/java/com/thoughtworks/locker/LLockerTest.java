@@ -15,6 +15,6 @@ public class LLockerTest {
     public void should_retrieval_fail_when_Llocker_retrieval_bag_given_Lokcer() {
         LLocker lLocker = new LLocker(1);
 
-        lLocker.retrieval(new Ticket());
+        lLocker.retrieval(new Ticket(SizeEnum.L));
     }
 }

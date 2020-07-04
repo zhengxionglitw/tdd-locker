@@ -49,7 +49,7 @@ public abstract class AbstractLocker implements ILocker {
         if (availableCapacity == 0) {
             throw new FullException();
         }
-        Ticket ticket = new Ticket();
+        Ticket ticket = new Ticket(size);
         storeBags.put(ticket, bag);
         this.availableCapacity--;
         return ticket;

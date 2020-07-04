@@ -8,6 +8,7 @@ import com.thoughtworks.locker.Ticket;
 import com.thoughtworks.locker.exception.ConfigErrorException;
 import com.thoughtworks.locker.exception.FullException;
 import com.thoughtworks.locker.exception.InvalidTicketException;
+import com.thoughtworks.locker.exception.TypeNotMatchException;
 import com.thoughtworks.locker.utils.CollectionUtil;
 
 import java.util.List;
@@ -35,6 +36,9 @@ public class PrimaryLockerRobot {
     }
 
     public Bag retrieval(Ticket ticket) {
+        if (ticket.getSize() != SizeEnum.M) {
+            throw new TypeNotMatchException();
+        }
         ILocker locker = lockerList.stream().filter(l -> l.exists(ticket)).findFirst().orElseThrow(InvalidTicketException::new);
         return locker.retrieval(ticket);
     }

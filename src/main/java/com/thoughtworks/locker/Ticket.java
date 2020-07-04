@@ -4,13 +4,19 @@ import java.util.UUID;
 
 public class Ticket {
     private final String ticket;
+    private final SizeEnum size;
 
-    public Ticket() {
+    public Ticket(final SizeEnum size) {
         this.ticket = UUID.randomUUID().toString();
+        this.size = size;
     }
 
     public String getTicket() {
         return ticket;
+    }
+
+    public SizeEnum getSize() {
+        return size;
     }
 
     @Override

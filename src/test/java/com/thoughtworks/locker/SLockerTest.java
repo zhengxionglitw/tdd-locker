@@ -56,6 +56,6 @@ public class SLockerTest {
     public void should_retrieval_fail_when_retrieval_bag_given_a_invalid_ticket() {
         SLocker locker = new SLocker(1);
 
-        locker.retrieval(new Ticket());
+        locker.retrieval(new Ticket(SizeEnum.S));
     }
 }
