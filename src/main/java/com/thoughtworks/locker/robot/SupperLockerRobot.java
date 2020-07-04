@@ -5,15 +5,15 @@ import com.thoughtworks.locker.SizeEnum;
 
 import java.util.List;
 
-public class PrimaryLockerRobot extends AbstractLockerRobot {
+public class SupperLockerRobot extends AbstractLockerRobot {
 
-    public PrimaryLockerRobot(final List<AbstractLocker> lockerList) {
+    public SupperLockerRobot(List<AbstractLocker> lockerList) {
         super(lockerList);
     }
 
     @Override
     protected SizeEnum getSize() {
-        return SizeEnum.M;
+        return SizeEnum.L;
     }
 
 

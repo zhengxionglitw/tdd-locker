@@ -1,6 +1,6 @@
 package com.thoughtworks.locker;
 
-import com.thoughtworks.locker.robot.PrimaryLockerRobot;
+import com.thoughtworks.locker.robot.AbstractLockerRobot;
 
 public class MLocker extends AbstractLocker {
 
@@ -10,6 +10,6 @@ public class MLocker extends AbstractLocker {
 
     @Override
     protected String getCalledClassName() {
-        return PrimaryLockerRobot.class.getName();
+        return AbstractLockerRobot.class.getName();
     }
 }
