@@ -51,4 +51,16 @@ public class SupperLockerRobotTest {
 
         supperLockerRobot.store(new Bag());
     }
+
+    @Test
+    public void should_retrieval_success_when_primary_robot_retrieval_given_a_valid_ticket() {
+        SupperLockerRobot supperLockerRobot = new SupperLockerRobot(Arrays.asList(new LLocker(1), new LLocker(1)));
+        Bag bag = new Bag();
+        Ticket ticket = supperLockerRobot.store(bag);
+
+        Bag retrievalBag = supperLockerRobot.retrieval(ticket);
+
+        Assert.assertNotNull(retrievalBag);
+        Assert.assertEquals(bag, retrievalBag);
+    }
 }
