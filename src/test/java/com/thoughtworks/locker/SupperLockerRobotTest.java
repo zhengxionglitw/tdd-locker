@@ -31,4 +31,15 @@ public class SupperLockerRobotTest {
         Assert.assertTrue(locker.exists(ticket));
     }
 
+    @Test
+    public void should_store_locker2_when_supper_robot_store_given_2_lockers_and_locker1_available_1_locker2_available_2() {
+        LLocker locker = new LLocker(2);
+        SupperLockerRobot supperLockerRobot = new SupperLockerRobot(Arrays.asList(new LLocker(1), locker));
+
+        Ticket ticket = supperLockerRobot.store(new Bag());
+
+        Assert.assertNotNull(ticket);
+        Assert.assertTrue(locker.exists(ticket));
+    }
+
 }

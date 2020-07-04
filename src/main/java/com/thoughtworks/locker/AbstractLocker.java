@@ -33,6 +33,11 @@ public abstract class AbstractLocker implements ILocker {
         return this.commonRetrieval(ticket);
     }
 
+    @Override
+    public int getAvailableCapacity() {
+        return availableCapacity;
+    }
+
     public SizeEnum getSize() {
         return size;
     }

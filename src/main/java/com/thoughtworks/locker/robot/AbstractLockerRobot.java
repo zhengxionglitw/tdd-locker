@@ -6,7 +6,6 @@ import com.thoughtworks.locker.ILocker;
 import com.thoughtworks.locker.SizeEnum;
 import com.thoughtworks.locker.Ticket;
 import com.thoughtworks.locker.exception.ConfigErrorException;
-import com.thoughtworks.locker.exception.FullException;
 import com.thoughtworks.locker.exception.InvalidTicketException;
 import com.thoughtworks.locker.exception.TypeNotMatchException;
 import com.thoughtworks.locker.utils.CollectionUtil;
@@ -22,6 +21,10 @@ public abstract class AbstractLockerRobot {
         this.lockerList = lockerList;
     }
 
+    public List<AbstractLocker> getLockerList() {
+        return lockerList;
+    }
+
     private void checkLockerSize(List<AbstractLocker> lockerList, SizeEnum size) {
         for (int i = 0; i < lockerList.size(); i++) {
             if (lockerList.get(i).getSize() != size) {
@@ -31,7 +34,7 @@ public abstract class AbstractLockerRobot {
     }
 
     public Ticket store(Bag bag) {
-        ILocker locker = lockerList.stream().filter(l -> !l.isFull()).findFirst().orElseThrow(FullException::new);
+        ILocker locker = selectLocker();
         return locker.store(bag);
     }
 
@@ -44,4 +47,6 @@ public abstract class AbstractLockerRobot {
     }
 
     protected abstract SizeEnum getSize();
+
+    protected abstract ILocker selectLocker();
 }
