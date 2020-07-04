@@ -2,6 +2,7 @@ package com.thoughtworks.locker;
 
 import com.thoughtworks.locker.exception.ConfigErrorException;
 import com.thoughtworks.locker.exception.FullException;
+import com.thoughtworks.locker.exception.InvalidTicketException;
 import com.thoughtworks.locker.robot.LockerRobotManager;
 import com.thoughtworks.locker.robot.PrimaryLockerRobot;
 import com.thoughtworks.locker.robot.SupperLockerRobot;
@@ -118,5 +119,17 @@ public class LockerRobotManagerTest {
 
         Assert.assertNotNull(ticket);
         Assert.assertEquals(bag, manager.retrieval(ticket));
+    }
+
+    @Test(expected = InvalidTicketException.class)
+    public void should_retrieval_success_when_robot_manager_store_given_a_invalid_ticket() {
+        SupperLockerRobot supperLockerRobot = new SupperLockerRobot(Arrays.asList(new LLocker(1)));
+        LockerRobotManager manager = new LockerRobotManager(new PrimaryLockerRobot(Arrays.asList(new MLocker(1))),
+                supperLockerRobot, new SLocker(1));
+        Bag bag = new Bag(SizeEnum.L);
+
+        Ticket ticket = manager.store(bag);
+
+        Assert.assertEquals(bag, manager.retrieval(new Ticket(SizeEnum.M)));
     }
 }
