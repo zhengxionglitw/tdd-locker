@@ -1,5 +1,7 @@
 package com.thoughtworks.locker;
 
+import com.thoughtworks.locker.robot.AbstractLockerRobot;
+
 public class LLocker extends AbstractLocker {
     public LLocker(int capacity) {
         super(capacity, SizeEnum.L);
@@ -7,6 +9,6 @@ public class LLocker extends AbstractLocker {
 
     @Override
     protected String getCalledClassName() {
-        return "unknown";
+        return AbstractLockerRobot.class.getName();
     }
 }
