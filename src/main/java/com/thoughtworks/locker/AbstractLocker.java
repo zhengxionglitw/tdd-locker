@@ -30,7 +30,7 @@ public abstract class AbstractLocker implements ILocker {
     @Override
     public Bag retrieval(Ticket ticket) {
         checkPermission(getCalledClassName());
-        return this.retrieval(ticket);
+        return this.commonRetrieval(ticket);
     }
 
     public SizeEnum getSize() {

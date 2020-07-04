@@ -52,4 +52,16 @@ public class PrimaryLockerRobotTest {
 
         primaryLockerRobot.store(new Bag());
     }
+
+    @Test
+    public void should_retrieval_success_when_primary_robot_retrieval_given_a_valid_ticket() {
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(new MLocker(1), new MLocker(1)));
+        Bag bag = new Bag();
+        Ticket ticket = primaryLockerRobot.store(bag);
+
+        Bag retrievalBag = primaryLockerRobot.retrieval(ticket);
+
+        Assert.assertNotNull(retrievalBag);
+        Assert.assertEquals(bag, retrievalBag);
+    }
 }
