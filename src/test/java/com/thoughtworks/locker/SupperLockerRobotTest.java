@@ -76,9 +76,16 @@ public class SupperLockerRobotTest {
     }
 
     @Test(expected = TypeNotMatchException.class)
-    public void should_retrieval_fail_when_supper_robot_retrieval_given_a_m_ticket() {
+    public void should_retrieval_fail_when_supper_robot_retrieval_given_a_s_ticket() {
         SupperLockerRobot supperLockerRobot = new SupperLockerRobot(Arrays.asList(new LLocker(1)));
 
         supperLockerRobot.retrieval(new Ticket(SizeEnum.S));
+    }
+
+    @Test(expected = TypeNotMatchException.class)
+    public void should_retrieval_fail_when_supper_robot_retrieval_given_a_m_ticket() {
+        SupperLockerRobot supperLockerRobot = new SupperLockerRobot(Arrays.asList(new LLocker(1)));
+
+        supperLockerRobot.retrieval(new Ticket(SizeEnum.M));
     }
 }
