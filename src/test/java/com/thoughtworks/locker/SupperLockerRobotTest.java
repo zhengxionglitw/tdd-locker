@@ -22,7 +22,7 @@ public class SupperLockerRobotTest {
 
     @Test
     public void should_store_success_when_supper_robot_store_given_2_lockers_and_all_have_available_capacity() {
-        LLocker locker = new LLocker(1);
+        LLocker locker = new LLocker(2);
         SupperLockerRobot supperLockerRobot = new SupperLockerRobot(Arrays.asList(locker, new LLocker(1)));
 
         Ticket ticket = supperLockerRobot.store(new Bag());
