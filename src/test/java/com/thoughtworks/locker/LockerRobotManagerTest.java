@@ -58,4 +58,17 @@ public class LockerRobotManagerTest {
 
         manager.store(sBag);
     }
+
+    @Test
+    public void should_store_primary_when_robot_manager_store_given_a_m_bag_and_primary_is_not_full() {
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(new MLocker(1)));
+        LockerRobotManager manager = new LockerRobotManager(primaryLockerRobot,
+                new SupperLockerRobot(Arrays.asList(new LLocker(1))), new SLocker(1));
+        Bag bag = new Bag(SizeEnum.M);
+
+        Ticket ticket = manager.store(bag);
+
+        Assert.assertNotNull(ticket);
+        Assert.assertEquals(bag, primaryLockerRobot.retrieval(ticket));
+    }
 }
