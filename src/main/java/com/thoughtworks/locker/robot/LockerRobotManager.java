@@ -1,6 +1,9 @@
 package com.thoughtworks.locker.robot;
 
+import com.thoughtworks.locker.Bag;
 import com.thoughtworks.locker.SLocker;
+import com.thoughtworks.locker.SizeEnum;
+import com.thoughtworks.locker.Ticket;
 import com.thoughtworks.locker.exception.ConfigErrorException;
 
 public class LockerRobotManager {
@@ -18,6 +21,19 @@ public class LockerRobotManager {
         this.primaryLockerRobot = primaryLockerRobot;
         this.supperLockerRobot = supperLockerRobot;
         this.sLocker = sLocker;
+    }
+
+    public Ticket store(Bag bag) {
+        Ticket ticket;
+        if (bag.getSize() == SizeEnum.S) {
+            ticket = sLocker.store(bag);
+        } else if (bag.getSize() == SizeEnum.M) {
+            ticket = primaryLockerRobot.store(bag);
+        } else {
+            ticket = supperLockerRobot.store(bag);
+        }
+
+        return ticket;
     }
 
     private void checkLockers(final PrimaryLockerRobot primaryLockerRobot,
