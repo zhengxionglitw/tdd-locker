@@ -2,6 +2,7 @@ package com.thoughtworks.locker;
 
 import com.thoughtworks.locker.exception.ConfigErrorException;
 import com.thoughtworks.locker.exception.FullException;
+import com.thoughtworks.locker.exception.InvalidTicketException;
 import com.thoughtworks.locker.robot.PrimaryLockerRobot;
 import com.thoughtworks.locker.robot.SupperLockerRobot;
 import org.junit.Assert;
@@ -53,7 +54,7 @@ public class SupperLockerRobotTest {
     }
 
     @Test
-    public void should_retrieval_success_when_primary_robot_retrieval_given_a_valid_ticket() {
+    public void should_retrieval_success_when_supper_robot_retrieval_given_a_valid_ticket() {
         SupperLockerRobot supperLockerRobot = new SupperLockerRobot(Arrays.asList(new LLocker(1), new LLocker(1)));
         Bag bag = new Bag();
         Ticket ticket = supperLockerRobot.store(bag);
@@ -62,5 +63,14 @@ public class SupperLockerRobotTest {
 
         Assert.assertNotNull(retrievalBag);
         Assert.assertEquals(bag, retrievalBag);
+    }
+
+    @Test(expected = InvalidTicketException.class)
+    public void should_retrieval_fail_when_supper_robot_retrieval_given_an_invalid_ticket() {
+        SupperLockerRobot supperLockerRobot = new SupperLockerRobot(Arrays.asList(new LLocker(1), new LLocker(1)));
+        Bag bag = new Bag();
+        supperLockerRobot.store(bag);
+
+        supperLockerRobot.retrieval(new Ticket(SizeEnum.L));
     }
 }
