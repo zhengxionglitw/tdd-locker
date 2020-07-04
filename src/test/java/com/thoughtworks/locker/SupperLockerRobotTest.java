@@ -3,6 +3,7 @@ package com.thoughtworks.locker;
 import com.thoughtworks.locker.exception.ConfigErrorException;
 import com.thoughtworks.locker.exception.FullException;
 import com.thoughtworks.locker.exception.InvalidTicketException;
+import com.thoughtworks.locker.exception.TypeNotMatchException;
 import com.thoughtworks.locker.robot.PrimaryLockerRobot;
 import com.thoughtworks.locker.robot.SupperLockerRobot;
 import org.junit.Assert;
@@ -72,5 +73,12 @@ public class SupperLockerRobotTest {
         supperLockerRobot.store(bag);
 
         supperLockerRobot.retrieval(new Ticket(SizeEnum.L));
+    }
+
+    @Test(expected = TypeNotMatchException.class)
+    public void should_retrieval_fail_when_supper_robot_retrieval_given_a_m_ticket() {
+        SupperLockerRobot supperLockerRobot = new SupperLockerRobot(Arrays.asList(new LLocker(1)));
+
+        supperLockerRobot.retrieval(new Ticket(SizeEnum.S));
     }
 }
