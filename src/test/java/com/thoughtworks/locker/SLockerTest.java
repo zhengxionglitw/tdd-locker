@@ -2,7 +2,6 @@ package com.thoughtworks.locker;
 
 import com.thoughtworks.locker.exception.FullException;
 import com.thoughtworks.locker.exception.InvalidTicketException;
-import com.thoughtworks.locker.exception.UnknownOptionException;
 import org.junit.Assert;
 import org.junit.Test;
 

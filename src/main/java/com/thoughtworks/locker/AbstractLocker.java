@@ -3,11 +3,15 @@ package com.thoughtworks.locker;
 import com.thoughtworks.locker.exception.FullException;
 import com.thoughtworks.locker.exception.InvalidTicketException;
 import com.thoughtworks.locker.exception.UnknownOptionException;
+import com.thoughtworks.locker.robot.IRobot;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public abstract class AbstractLocker implements ILocker {
+    private final Set<IRobot> managedByRobots = new HashSet<>();
     private final Map<Ticket, Bag> storeBags;
     private final SizeEnum size;
     private int availableCapacity;
@@ -36,6 +40,16 @@ public abstract class AbstractLocker implements ILocker {
     @Override
     public int getAvailableCapacity() {
         return availableCapacity;
+    }
+
+    @Override
+    public void addManagedByRobot(IRobot robot) {
+        managedByRobots.add(robot);
+    }
+
+    @Override
+    public int managedByRobotsNum() {
+        return managedByRobots.size();
     }
 
     public SizeEnum getSize() {

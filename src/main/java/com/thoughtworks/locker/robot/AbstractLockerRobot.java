@@ -12,7 +12,7 @@ import com.thoughtworks.locker.utils.CollectionUtil;
 
 import java.util.List;
 
-public abstract class AbstractLockerRobot {
+public abstract class AbstractLockerRobot implements IRobot {
     private final List<AbstractLocker> lockerList;
 
     public AbstractLockerRobot(final List<AbstractLocker> lockerList) {
