@@ -1,6 +1,7 @@
 package com.thoughtworks.locker;
 
 import com.thoughtworks.locker.exception.ConfigErrorException;
+import com.thoughtworks.locker.exception.FullException;
 import com.thoughtworks.locker.robot.LockerRobotManager;
 import com.thoughtworks.locker.robot.PrimaryLockerRobot;
 import com.thoughtworks.locker.robot.SupperLockerRobot;
@@ -45,5 +46,16 @@ public class LockerRobotManagerTest {
 
         Assert.assertNotNull(ticket);
         Assert.assertEquals(sBag, locker.retrieval(ticket));
+    }
+
+    @Test(expected = FullException.class)
+    public void should_store_fail_when_robot_manager_store_given_a_s_bag_and_sLocker_is_full() {
+        SLocker locker = new SLocker(1);
+        LockerRobotManager manager = new LockerRobotManager(new PrimaryLockerRobot(Arrays.asList(new MLocker(1))),
+                new SupperLockerRobot(Arrays.asList(new LLocker(1))), locker);
+        Bag sBag = new Bag(SizeEnum.S);
+        manager.store(sBag);
+
+        manager.store(sBag);
     }
 }
