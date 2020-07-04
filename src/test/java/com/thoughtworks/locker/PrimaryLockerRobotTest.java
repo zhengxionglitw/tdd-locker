@@ -2,6 +2,7 @@ package com.thoughtworks.locker;
 
 import com.thoughtworks.locker.exception.ConfigErrorException;
 import com.thoughtworks.locker.exception.FullException;
+import com.thoughtworks.locker.exception.InvalidTicketException;
 import com.thoughtworks.locker.robot.PrimaryLockerRobot;
 import org.junit.Assert;
 import org.junit.Test;
@@ -63,5 +64,14 @@ public class PrimaryLockerRobotTest {
 
         Assert.assertNotNull(retrievalBag);
         Assert.assertEquals(bag, retrievalBag);
+    }
+
+    @Test(expected = InvalidTicketException.class)
+    public void should_retrieval_fail_when_primary_robot_retrieval_given_an_invalid_ticket() {
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(new MLocker(1), new MLocker(1)));
+        Bag bag = new Bag();
+        Ticket ticket = primaryLockerRobot.store(bag);
+
+        primaryLockerRobot.retrieval(new Ticket());
     }
 }
