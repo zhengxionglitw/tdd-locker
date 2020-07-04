@@ -106,4 +106,17 @@ public class LockerRobotManagerTest {
 
         manager.store(bag);
     }
+
+    @Test
+    public void should_retrieval_success_when_robot_manager_store_given_a_valid_ticket() {
+        SupperLockerRobot supperLockerRobot = new SupperLockerRobot(Arrays.asList(new LLocker(1)));
+        LockerRobotManager manager = new LockerRobotManager(new PrimaryLockerRobot(Arrays.asList(new MLocker(1))),
+                supperLockerRobot, new SLocker(1));
+        Bag bag = new Bag(SizeEnum.L);
+
+        Ticket ticket = manager.store(bag);
+
+        Assert.assertNotNull(ticket);
+        Assert.assertEquals(bag, manager.retrieval(ticket));
+    }
 }

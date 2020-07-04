@@ -36,6 +36,18 @@ public class LockerRobotManager {
         return ticket;
     }
 
+    public Bag retrieval(Ticket ticket) {
+        Bag bag;
+        if (ticket.getSize() == SizeEnum.S) {
+            bag = sLocker.retrieval(ticket);
+        } else if (ticket.getSize() == SizeEnum.M) {
+            bag = primaryLockerRobot.retrieval(ticket);
+        } else {
+            bag = supperLockerRobot.retrieval(ticket);
+        }
+        return bag;
+    }
+
     private void checkLockers(final PrimaryLockerRobot primaryLockerRobot,
                               final SupperLockerRobot supperLockerRobot,
                               final SLocker sLocker) {
