@@ -28,7 +28,7 @@
 - Given SupperLockerRobot管理两个M号Locker，两个locker都已满 When SupperLockerRobot存包 Then 存包失败，提示储物柜已满
 - Given 一张有效SupperLockerRobot票据 When SupperLockerRobot取包 Then 取包成功
 - Given 一张无效SupperLockerRobot票据 When SupperLockerRobot取包 Then 取包失败，提示无效票据
-- Given 一张M号票据 When SupperLockerRobot取包 Then 取包失败，提示票据型号不对
+- Given 一张L号票据 When SupperLockerRobot取包 Then 取包失败，提示票据型号不对
 - Given 一张S号票据 When SupperLockerRobot取包 Then 取包失败，提示票据型号不对
 
 ## locker robot manager

@@ -82,4 +82,11 @@ public class PrimaryLockerRobotTest {
 
         primaryLockerRobot.retrieval(new Ticket(SizeEnum.S));
     }
+
+    @Test(expected = TypeNotMatchException.class)
+    public void should_retrieval_fail_when_primary_robot_retrieval_given_a_m_ticket() {
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(new MLocker(1)));
+
+        primaryLockerRobot.retrieval(new Ticket(SizeEnum.L));
+    }
 }
