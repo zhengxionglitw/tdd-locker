@@ -18,6 +18,9 @@ public abstract class AbstractLockerRobot implements IRobot {
     public AbstractLockerRobot(final List<AbstractLocker> lockerList) {
         assert (!CollectionUtil.isEmpty(lockerList));
         checkLockerSize(lockerList, getSize());
+        for (ILocker locker : lockerList) {
+            locker.addManagedByRobot(this);
+        }
         this.lockerList = lockerList;
     }
 
