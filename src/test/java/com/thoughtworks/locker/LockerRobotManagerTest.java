@@ -95,4 +95,15 @@ public class LockerRobotManagerTest {
         Assert.assertNotNull(ticket);
         Assert.assertEquals(bag, supperLockerRobot.retrieval(ticket));
     }
+
+    @Test(expected = FullException.class)
+    public void should_store_supper_when_robot_manager_store_given_a_m_bag_and_supper_is_full() {
+        SupperLockerRobot supperLockerRobot = new SupperLockerRobot(Arrays.asList(new LLocker(1)));
+        LockerRobotManager manager = new LockerRobotManager(new PrimaryLockerRobot(Arrays.asList(new MLocker(1))),
+                supperLockerRobot, new SLocker(1));
+        Bag bag = new Bag(SizeEnum.L);
+        manager.store(new Bag(SizeEnum.L));
+
+        manager.store(bag);
+    }
 }
